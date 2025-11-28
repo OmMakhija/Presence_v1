@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Session Details - PRESENCE{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="session-detail">
+    <div class="session-header">
+        <h2>{{ session.course_name }} ({{ session.course_code }})</h2>
+        <div class="session-info">
+            <p><strong>Date:</strong> {{ session.session_date.strftime('%Y-%m-%d') }}</p>
+            <p><strong>Time:</strong> {{ session.start_time.strftime('%H:%M') }} - {{ session.end_time.strftime('%H:%M') }}</p>
+            <p><strong>Status:</strong>
+                <span class="status-badge {% if session.is_active %}active{% endif %}">
+                    {% if session.is_active %}Active{% else %}Inactive{% endif %}
+                </span>
+            </p>
+        </div>
+
+        <div class="session-actions">
+            <button id="exportBtn" class="btn btn-secondary" data-session-id="{{ session.id }}">
+                Export Attendance (CSV)
+            </button>
+        </div>
+    </div>
+
+    <div class="attendance-summary">
+        <h3>Attendance Summary</h3>
+        <div class="summary-stats">
+            <div class="stat-card">
+                <h4>Total Students</h4>
+                <span class="stat-number">{{ attendance_summary|length }}</span>
+            </div>
+
+            <div class="stat-card">
+                <h4>Present</h4>
+                <span class="stat-number present">{{ attendance_summary|selectattr('status', 'equalto', 'present')|list|length }}</span>
+            </div>
+
+            <div class="stat-card">
+                <h4>Absent</h4>
+                <span class="stat-number absent">{{ attendance_summary|selectattr('status', 'equalto', 'absent')|list|length }}</span>
+            </div>
+
+            <div class="stat-card">
+                <h4>Proxy Suspected</h4>
+                <span class="stat-number proxy">{{ attendance_summary|selectattr('status', 'equalto', 'proxy_suspected')|list|length }}</span>
+            </div>
+        </div>
+
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>Roll Number</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Timestamp</th>
+                    <th>Verification</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in attendance_summary %}
+                <tr data-student-id="{{ item.student.id }}" data-session-id="{{ session.id }}">
+                    <td>{{ item.student.roll_number }}</td>
+                    <td>{{ item.student.name }}</td>
+                    <td>
+                        <span class="status-{{ item.status }}">
+                            {{ item.status|title }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if item.attendance %}
+                            {{ item.attendance.timestamp.strftime('%H:%M:%S') }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.attendance %}
+                            <div class="verification-icons">
+                                {% if item.attendance.ble_verified %}
+                                    <span class="verification-icon ble" title="BLE Verified">📶</span>
+                                {% endif %}
+                                {% if item.attendance.face_verified %}
+                                    <span class="verification-icon face" title="Face Verified">👤</span>
+                                {% endif %}
+                                {% if item.attendance.liveness_verified %}
+                                    <span class="verification-icon liveness" title="Liveness Verified">✅</span>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        <select class="status-select">
+                            <option value="present" {% if item.status == 'present' %}selected{% endif %}>Present</option>
+                            <option value="absent" {% if item.status == 'absent' %}selected{% endif %}>Absent</option>
+                            <option value="proxy_suspected" {% if item.status == 'proxy_suspected' %}selected{% endif %}>Proxy Suspected</option>
+                        </select>
+                        <button class="btn btn-sm btn-primary update-btn">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if anomalies %}
+    <div class="anomalies-section">
+        <h3>Anomalies Detected</h3>
+        <table class="anomaly-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Student</th>
+                    <th>Type</th>
+                    <th>Severity</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for anomaly in anomalies %}
+                <tr>
+                    <td>{{ anomaly.timestamp.strftime('%H:%M:%S') }}</td>
+                    <td>{{ anomaly.user.name if anomaly.user else 'N/A' }}</td>
+                    <td>{{ anomaly.anomaly_type }}</td>
+                    <td><span class="severity-{{ anomaly.severity }}">{{ anomaly.severity }}</span></td>
+                    <td>{{ anomaly.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/session_detail.js') }}"></script>
+{% endblock %}

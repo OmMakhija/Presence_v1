@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Mark Attendance - PRESENCE{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="attendance-marking">
+    <h2>Mark Attendance</h2>
+
+    {% if active_sessions %}
+        <div class="session-selection">
+            <h3>Select Active Session</h3>
+            <div class="session-grid">
+                {% for session in active_sessions %}
+                <div class="session-card" data-session-id="{{ session.id }}">
+                    <h4>{{ session.course_name }}</h4>
+                    <p><strong>Code:</strong> {{ session.course_code }}</p>
+                    <p><strong>Time:</strong> {{ session.start_time.strftime('%H:%M') }} - {{ session.end_time.strftime('%H:%M') }}</p>
+                    <p><strong>Date:</strong> {{ session.session_date.strftime('%Y-%m-%d') }}</p>
+                    <button class="btn btn-primary select-session-btn">Select Session</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="attendance-process" id="attendanceProcess" style="display:none;">
+            <h3>Attendance Verification</h3>
+
+            <div class="verification-steps">
+                <div class="step" id="step1">
+                    <h4>Step 1: BLE Proximity Check</h4>
+                    <p>Ensure you're within classroom range</p>
+                    <div class="status-indicator" id="bleStatus">Checking...</div>
+                </div>
+
+                <div class="step" id="step2">
+                    <h4>Step 2: Facial Recognition</h4>
+                    <p>Position your face in the camera</p>
+                    <div class="camera-container">
+                        <video id="webcam" autoplay playsinline></video>
+                        <canvas id="canvas" style="display:none;"></canvas>
+                    </div>
+                </div>
+
+                <div class="step" id="step3" style="display:none;">
+                    <h4>Step 3: Liveness Challenge</h4>
+                    <p id="challengeText">Please wait...</p>
+                    <div class="status-indicator" id="challengeStatus">Preparing...</div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="startAttendance" class="btn btn-primary">Start Verification</button>
+                <button id="cancelAttendance" class="btn btn-secondary" style="display:none;">Cancel</button>
+            </div>
+
+            <div class="status-message" id="statusMessage"></div>
+            
+            <div class="verification-logs" id="verificationLogs" style="margin-top: 20px; padding: 10px; background: #f8f9fa; border-radius: 5px; font-family: monospace; font-size: 0.9em; max-height: 200px; overflow-y: auto; display: none;">
+                <h4>Verification Logs</h4>
+                <div id="logContent"></div>
+            </div>
+        </div>
+    {% else %}
+        <div class="no-sessions">
+            <h3>No Active Sessions</h3>
+            <p>There are currently no active class sessions for attendance marking.</p>
+            <p>Please check back later or contact your instructor.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+<script src="{{ url_for('static', filename='js/attendance.js') }}"></script>
+{% endblock %}

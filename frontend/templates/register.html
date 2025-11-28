@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Register - PRESENCE{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Register for PRESENCE</h2>
+        <form method="POST" action="{{ url_for('auth.register') }}">
+            <div class="form-group">
+                <label for="roll_number">Roll Number / Employee ID</label>
+                <input type="text" id="roll_number" name="roll_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="device_uuid">BLE Device Address (e.g. 78:DB:2F:16:9D:4A)</label>
+                <input type="text" id="device_uuid" name="device_uuid" placeholder="XX:XX:XX:XX:XX:XX">
+                <small>Required for student attendance verification.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <p class="auth-link">
+            Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

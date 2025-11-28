@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Teacher Dashboard - PRESENCE{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="teacher-dashboard">
+    <h2>Teacher Dashboard</h2>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <h3>Quick Actions</h3>
+            <a href="{{ url_for('teacher.sessions') }}" class="btn btn-primary">Manage Sessions</a>
+            <a href="{{ url_for('teacher.reports') }}" class="btn btn-secondary">View Reports</a>
+            <a href="{{ url_for('teacher.manage_students') }}" class="btn btn-secondary">Manage Students</a>
+        </div>
+
+        <div class="card">
+            <h3>Today's Sessions</h3>
+            {% if today_sessions %}
+                <ul class="session-list">
+                    {% for session in today_sessions %}
+                    <li>
+                        <strong>{{ session.course_name }}</strong> ({{ session.course_code }})
+                        <br>
+                        {{ session.start_time.strftime('%H:%M') }} - {{ session.end_time.strftime('%H:%M') }}
+                        <br>
+                        <span class="status-badge {% if session.is_active %}active{% endif %}">
+                            {% if session.is_active %}Active{% else %}Inactive{% endif %}
+                        </span>
+                        <a href="{{ url_for('teacher.view_session', session_id=session.id) }}" class="btn-link">View</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No sessions scheduled for today.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Recent Anomalies</h3>
+        {% if recent_anomalies %}
+            <table class="anomaly-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Student</th>
+                        <th>Type</th>
+                        <th>Severity</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for anomaly in recent_anomalies %}
+                    <tr>
+                        <td>{{ anomaly.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>{{ anomaly.user.name if anomaly.user else 'N/A' }}</td>
+                        <td>{{ anomaly.anomaly_type }}</td>
+                        <td><span class="severity-{{ anomaly.severity }}">{{ anomaly.severity }}</span></td>
+                        <td>{{ anomaly.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No anomalies detected recently.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

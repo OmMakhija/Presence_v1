@@ -1,0 +1,242 @@
+.student-dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+}
+
+.status-success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.attendance-table th,
+.attendance-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.attendance-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.face-registration {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.instruction-card {
+    background: #e8f4fd;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #667eea;
+}
+
+.instruction-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.instruction-card li {
+    margin-bottom: 0.5rem;
+}
+
+.camera-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+#webcam {
+    width: 100%;
+    max-width: 640px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.status-message {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    min-height: 2rem;
+}
+
+.button-group {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.progress-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.attendance-marking {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.session-selection {
+    margin-bottom: 3rem;
+}
+
+.session-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.session-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.session-card:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.session-card h4 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.session-card p {
+    margin-bottom: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.select-session-btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.attendance-process {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.verification-steps {
+    margin-bottom: 2rem;
+}
+
+.step {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.step h4 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.step p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.status-indicator {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-align: center;
+    background: #f0f0f0;
+    color: #666;
+}
+
+.status-indicator.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-indicator.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-indicator.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.no-sessions {
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.no-sessions h3 {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.no-sessions p {
+    color: #888;
+    margin-bottom: 0.5rem;
+}

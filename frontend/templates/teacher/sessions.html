@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Sessions - PRESENCE{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="sessions-management">
+    <h2>Manage Sessions</h2>
+
+    <div class="session-actions">
+        <button id="createSessionBtn" class="btn btn-primary">Create New Session</button>
+    </div>
+
+    <!-- Create Session Modal -->
+    <div id="createSessionModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Create New Session</h3>
+            <form id="createSessionForm">
+                <div class="form-group">
+                    <label for="course_code">Course Code</label>
+                    <input type="text" id="course_code" name="course_code" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="course_name">Course Name</label>
+                    <input type="text" id="course_name" name="course_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="session_date">Date</label>
+                    <input type="date" id="session_date" name="session_date" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start_time">Start Time</label>
+                        <input type="time" id="start_time" name="start_time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="end_time">End Time</label>
+                        <input type="time" id="end_time" name="end_time" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="is_active" name="is_active">
+                        Activate session immediately
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Session</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="sessions-list">
+        <h3>All Sessions</h3>
+        {% if sessions %}
+            <div class="sessions-grid">
+                {% for session in sessions %}
+                <div class="session-card" data-session-id="{{ session.id }}">
+                    <h4>{{ session.course_name }}</h4>
+                    <p><strong>Code:</strong> {{ session.course_code }}</p>
+                    <p><strong>Date:</strong> {{ session.session_date.strftime('%Y-%m-%d') }}</p>
+                    <p><strong>Time:</strong> {{ session.start_time.strftime('%H:%M') }} - {{ session.end_time.strftime('%H:%M') }}</p>
+
+                    <div class="session-controls">
+                        <button class="btn btn-sm toggle-session-btn {% if session.is_active %}btn-danger{% else %}btn-success{% endif %}"
+                                data-session-id="{{ session.id }}">
+                            {% if session.is_active %}Deactivate{% else %}Activate{% endif %}
+                        </button>
+                        <a href="{{ url_for('teacher.view_session', session_id=session.id) }}" class="btn btn-sm btn-secondary">View Details</a>
+                        <button class="btn btn-sm btn-danger delete-session-btn" data-session-id="{{ session.id }}">Delete</button>
+                    </div>
+
+                    <div class="session-status">
+                        <span class="status-badge {% if session.is_active %}active{% endif %}">
+                            {% if session.is_active %}Active{% else %}Inactive{% endif %}
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No sessions created yet. Create your first session to get started.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/teacher.js') }}"></script>
+{% endblock %}
