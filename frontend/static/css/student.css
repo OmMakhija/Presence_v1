@@ -1,242 +1,278 @@
-.student-dashboard {
-    max-width: 1000px;
+/* ---------------------------
+   student.css — updated file
+   Replace your current /static/css/student.css with this
+   --------------------------- */
+
+/* Page background */
+body {
+    background: linear-gradient(135deg, #f4f8ff 0%, #e6f0ff 45%, #e3f3ff 100%);
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #325e9b;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    background-color: #5f90db;  /* theme blue */
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(16, 64, 122, 0.12);
+}
+
+/* Main Wrapper: center the content and keep lots of whitespace like your screenshot */
+.wrapper-dashboard {
+    max-width: 1200px;
+    margin: 56px auto;
+    padding: 0 24px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Heading */
+.dashboard-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 28px;
+    color: #0e1b2a;
+    letter-spacing: 0.2px;
+}
+
+/* CARD GRID:
+   - top row: 2 centered cards (face + mark)
+   - second row: attendance card spans full width
+*/
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(540px, 720px)); /* INCREASED */
+    gap: 25px; /* spacing between cards */
+    justify-content: center;
+    align-items: start;
     margin: 0 auto;
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+/* Make the attendance card span 2 columns */
+.attendance-history {
+    grid-column: 1 / -1; /* span all columns in the grid */
+    margin-top: 18px;
 }
 
-.card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+/* Card base style */
+.dash-card {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    color: #0e1b2a;
+    padding: 32px 30px;
+    border-radius: 14px;
+    text-align: left;
+    box-shadow: 0 10px 28px rgba(18, 36, 57, 0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+    border: 1px solid rgba(15,36,63,0.04);
+    min-height: 160px;
 }
 
-.card h3 {
-    margin-bottom: 1rem;
-    color: #333;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 0.5rem;
+.dash-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(15,36,63,0.09);
 }
 
-.status-success {
-    color: #28a745;
-    font-weight: bold;
+/* Card title */
+.dash-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #0f2030;
 }
 
-.status-warning {
-    color: #ffc107;
-    font-weight: bold;
+/* small description text inside cards */
+.desc, .no-records, .status {
+    font-size: 13px;
+    color: #516375;
+    margin: 0 0 12px 0;
 }
 
+/* status labels */
+.status {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+.success { color: #1fb16a; } /* green */
+.warning { color: #f0a83a; }
+
+/* Action buttons (aligned left inside cards) */
+.action-btn {
+    display: inline-block;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .12s ease, opacity .12s ease;
+    box-shadow: 0 6px 18px rgba(95,144,219,0.14);
+}
+
+/* primary button uses app blue */
+.primary {
+    background: linear-gradient(180deg, #3d7fd6, #2f6fc2);
+    color: #fff;
+    border: none;
+}
+
+/* secondary is darker (update face) */
+.secondary {
+    background: #0f2030;
+    color: #fff;
+}
+
+/* hover */
+.action-btn:hover { transform: translateY(-3px); opacity: 0.98; }
+
+/* Attendance card specifics (spans full width) */
+.attendance-history {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(18, 36, 57, 0.06);
+    border: 1px solid rgba(15,36,63,0.04);
+    text-align: left;
+}
+
+/* Attendance table */
 .attendance-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #13202a;
 }
 
 .attendance-table th,
 .attendance-table td {
-    padding: 0.75rem;
+    padding: 12px 14px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(15,36,63,0.06);
 }
 
-.attendance-table th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-    color: #333;
+.attendance-table tr:nth-child(even) {
+    background: rgba(14,24,40,0.02);
 }
 
-.face-registration {
-    max-width: 800px;
-    margin: 0 auto;
+/* No records text */
+.no-records {
+    color: #4b5966;
+    font-size: 14px;
 }
 
-.instruction-card {
-    background: #e8f4fd;
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    border-left: 4px solid #667eea;
+/* Responsive tweaks */
+@media (max-width: 960px) {
+    .card-container {
+        grid-template-columns: repeat(1, minmax(260px, 520px));
+        gap: 18px;
+    }
+    .attendance-history { grid-column: 1 / -1; }
+    .wrapper-dashboard { padding: 0 14px; }
 }
 
-.instruction-card ul {
-    margin: 0;
-    padding-left: 1.5rem;
+@media (max-width: 420px) {
+    .dashboard-title { font-size: 26px; margin-bottom: 18px; }
+    .dash-card { padding: 18px; min-height: 100px; }
+    .action-btn { padding: 8px 12px; font-size: 13px; }
 }
 
-.instruction-card li {
-    margin-bottom: 0.5rem;
-}
-
-.camera-container {
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0;
-}
-
-#webcam {
-    width: 100%;
-    max-width: 640px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-
-.status-message {
-    text-align: center;
-    margin: 1rem 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    min-height: 2rem;
-}
-
-.button-group {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.progress-container {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-}
-
-.progress-bar::after {
-    content: '';
-    display: block;
-    height: 100%;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    width: 0%;
-    transition: width 0.3s ease;
-}
-
-.attendance-marking {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.session-selection {
-    margin-bottom: 3rem;
-}
-
+/* -------------------------
+   SESSION CARD GRID
+------------------------- */
 .session-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+    gap: 28px;
+    margin-top: 25px;
 }
 
+/* -------------------------
+   INDIVIDUAL SESSION CARD
+------------------------- */
 .session-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    border: 2px solid #f0f0f0;
-    transition: all 0.3s ease;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 24px 22px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+    border: 1px solid #e8e8e8;
+    position: relative;
+    transition: 0.25s ease;
 }
 
 .session-card:hover {
-    border-color: #667eea;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* glowing side strip */
+.session-strip {
+    width: 6px;
+    height: 55px;
+    background: #32ff74;
+    border-radius: 10px;
+    position: absolute;
+    left: -3px;
+    top: 22px;
+}
+
+/* title */
+.session-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #0e1b2a;
+}
+
+/* details text */
+.session-details {
+    font-size: 14px;
+    color: #425160;
+    margin: 4px 0;
+}
+
+/* select button */
+.session-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 16px;
+    background: #3d7fd6;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.session-btn:hover {
+    background: #2f6fc2;
+}
+
+/* Increase spacing between content and button */
+.session-card .btn {
+    margin-top: 18px !important;
+}
+
+/* Button hover effect */
+.session-card .btn:hover {
+    background-color: #1a73e8 !important; /* Google blue */
+    border-color: #1a73e8 !important;
+    color: #fff !important;
     transform: translateY(-2px);
+    transition: 0.2s ease-in-out;
 }
 
-.session-card h4 {
-    margin-bottom: 1rem;
-    color: #333;
+.session-card .btn {
+    transition: 0.25s ease;
 }
 
-.session-card p {
-    margin-bottom: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
-}
 
-.select-session-btn {
-    width: 100%;
-    margin-top: 1rem;
-}
-
-.attendance-process {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.verification-steps {
-    margin-bottom: 2rem;
-}
-
-.step {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background: #fafafa;
-}
-
-.step h4 {
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.step p {
-    color: #666;
-    margin-bottom: 1rem;
-}
-
-.status-indicator {
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    text-align: center;
-    background: #f0f0f0;
-    color: #666;
-}
-
-.status-indicator.success {
-    background: #d4edda;
-    color: #155724;
-}
-
-.status-indicator.error {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.status-indicator.warning {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.no-sessions {
-    text-align: center;
-    background: white;
-    padding: 3rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.no-sessions h3 {
-    color: #666;
-    margin-bottom: 1rem;
-}
-
-.no-sessions p {
-    color: #888;
-    margin-bottom: 0.5rem;
-}

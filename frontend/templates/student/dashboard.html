@@ -7,60 +7,63 @@
 {% endblock %}
 
 {% block content %}
-<div class="student-dashboard">
-    <h2>Welcome, {{ current_user.name }}</h2>
+<div class="wrapper-dashboard">
 
-    <div class="dashboard-grid">
-        <div class="card">
+    <h2 class="dashboard-title">Welcome, {{ current_user.name }}</h2>
+
+    <div class="card-container">
+
+        <div class="dash-card">
             <h3>Face Registration</h3>
             {% if has_face %}
-                <p class="status-success">✓ Face Registered</p>
-                <a href="{{ url_for('student.register_face_page') }}" class="btn btn-secondary">Update Face Data</a>
+                <p class="status success">✓ Face Registered</p>
+                <a href="{{ url_for('student.register_face_page') }}" class="action-btn secondary">Update Face Data</a>
             {% else %}
-                <p class="status-warning">⚠ Face Not Registered</p>
-                <a href="{{ url_for('student.register_face_page') }}" class="btn btn-primary">Register Face</a>
+                <p class="status warning">⚠ Face Not Registered</p>
+                <a href="{{ url_for('student.register_face_page') }}" class="action-btn primary">Register Face</a>
             {% endif %}
         </div>
 
-        <div class="card">
+        <div class="dash-card">
             <h3>Mark Attendance</h3>
-            <p>Mark your attendance for active sessions</p>
-            <a href="{{ url_for('student.mark_attendance_page') }}" class="btn btn-primary">Mark Attendance</a>
+            <p class="desc">Mark your attendance for active sessions</p>
+            <a href="{{ url_for('student.mark_attendance_page') }}" class="action-btn primary">Mark Attendance</a>
         </div>
-    </div>
 
-    <div class="card">
-        <h3>Recent Attendance</h3>
-        {% if recent_attendance %}
-            <table class="attendance-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Course</th>
-                        <th>Status</th>
-                        <th>Verified</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for att in recent_attendance %}
-                    <tr>
-                        <td>{{ att.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
-                        <td>{{ att.session.course_name }}</td>
-                        <td>{{ att.status }}</td>
-                        <td>
-                            {% if att.face_verified and att.ble_verified %}
-                                ✓
-                            {% else %}
-                                ✗
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No attendance records yet.</p>
-        {% endif %}
+        <div class="dash-card attendance-history">
+            <h3>Recent Attendance</h3>
+            {% if recent_attendance %}
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Course</th>
+                            <th>Status</th>
+                            <th>Verified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for att in recent_attendance %}
+                        <tr>
+                            <td>{{ att.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ att.session.course_name }}</td>
+                            <td>{{ att.status }}</td>
+                            <td>
+                                {% if att.face_verified and att.ble_verified %}
+                                    ✓
+                                {% else %}
+                                    ✗
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-records">No attendance records yet.</p>
+            {% endif %}
+        </div>
+
     </div>
 </div>
 {% endblock %}

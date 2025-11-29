@@ -1,360 +1,366 @@
-.teacher-dashboard {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+/* ---------------------------
+   teacher.css — unified theme with student.css
+----------------------------*/
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.card h3 {
-    margin-bottom: 1rem;
-    color: #333;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 0.5rem;
-}
-
-.session-list {
-    list-style: none;
+/* Background + font */
+body {
+    background: linear-gradient(135deg, #f4f8ff 0%, #e6f0ff 45%, #e3f3ff 100%);
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    color: #325e9b;
+    margin: 0;
     padding: 0;
 }
 
+/* Navbar - same as student */
+.navbar {
+    width: 100%;
+    background-color: #5f90db;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(16, 64, 122, 0.12);
+}
+
+/* Wrapper */
+.teacher-dashboard,
+.sessions-management,
+.session-detail,
+.manage-students,
+.reports-page {
+    max-width: 1200px;
+    margin: 56px auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+/* Section Titles */
+h1, h2, h3, h4 {
+    color: #0e1b2a;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* Grid layout */
+.dashboard-grid,
+.sessions-grid,
+.session-info,
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+/* Card style (match student cards) */
+.card,
+.session-card,
+.session-header,
+.stat-card,
+.attendance-summary,
+.anomalies-section {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    padding: 24px 26px;
+    margin-bottom: 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(18, 36, 57, 0.06);
+    border: 1px solid rgba(15, 36, 63, 0.04);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover,
+.session-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(15,36,63,0.09);
+}
+
+/* Card headings */
+.card h3,
+.session-card h4,
+.session-header h3 {
+    border-bottom: 2px solid #5f90db;
+    padding-bottom: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f2030;
+}
+
+/* List items */
 .session-list li {
-    padding: 1rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    background: #fafafa;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(18,36,57,0.06);
+    border: 1px solid rgba(15,36,63,0.04);
+    margin-bottom: 14px;
 }
 
-.session-list li strong {
-    color: #333;
-}
-
+/* Status Badges */
 .status-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
+    border-radius: 12px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 700;
 }
+.status-badge.active { color: #1fb16a; background: #e8f9ef; }
+.status-badge.inactive { color: #6c757d; background: #f2f3f5; }
 
-.status-badge.active {
-    background: #d4edda;
-    color: #155724;
-}
-
-.status-badge.inactive {
-    background: #f8f9fa;
-    color: #6c757d;
-}
-
+/* Small button links */
 .btn-link {
     background: none;
     border: none;
-    color: #667eea;
+    color: #3d7fd6;
     text-decoration: underline;
     cursor: pointer;
     padding: 0;
-    font-size: inherit;
 }
+.btn-link:hover { opacity: 0.8; }
 
-.btn-link:hover {
-    color: #5568d3;
-}
-
+/* Tables - unify with student tables */
+.students-table,
 .anomaly-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    margin-top: 14px;
+    font-size: 14px;
+    color: #13202a;
 }
 
-.anomaly-table th,
-.anomaly-table td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.students-table th, .students-table td,
+.anomaly-table th, .anomaly-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(15,36,63,0.06);
 }
 
-.anomaly-table th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-    color: #333;
+.students-table th, .anomaly-table th {
+    background: rgba(14,24,40,0.02);
+    font-weight: 700;
+    color: #0f2030;
 }
 
-.severity-medium {
-    color: #ffc107;
+.students-table tr:nth-child(even),
+.anomaly-table tr:nth-child(even) {
+    background: rgba(14,24,40,0.02);
 }
 
-.severity-high {
-    color: #dc3545;
-}
+/* Severity colors */
+.severity-high { color: #dc3545; }
+.severity-medium { color: #f0a83a; }
+.severity-low { color: #1fb16a; }
 
-.severity-low {
-    color: #28a745;
-}
-
-/* Sessions Management */
-.sessions-management {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.session-actions {
-    margin-bottom: 2rem;
-}
-
-.sessions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.session-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    border: 2px solid #f0f0f0;
-    transition: all 0.3s ease;
-}
-
-.session-card:hover {
-    border-color: #667eea;
-    transform: translateY(-2px);
-}
-
-.session-card h4 {
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.session-card p {
-    margin-bottom: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.session-controls {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
+/* Session control buttons */
 .btn-sm {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+    padding: 9px 14px;
+    font-size: 13px;
+    border-radius: 8px;
 }
 
-.session-status {
-    margin-top: 1rem;
-    text-align: right;
+/* Primary button (same as student css) */
+.primary {
+    background: linear-gradient(180deg, #3d7fd6, #2f6fc2);
+    color: #fff;
+    border: none;
 }
 
-/* Modal Styles */
+/* Dark secondary button */
+.secondary {
+    background: #0f2030;
+    color: white;
+}
+
+/* Hover */
+.btn-sm:hover {
+    transform: translateY(-3px);
+    opacity: 0.95;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Button base style */
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Primary button */
+.btn-primary {
+    background: linear-gradient(180deg, #3d7fd6, #2f6fc2);
+    color: white;
+}
+
+/* Secondary button */
+.btn-secondary {
+    background: #0f2030;
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    background: inherit;   /* keep same background */
+    color: inherit;        /* keep same text color */
+    filter: brightness(1.1);  /* slight hover highlight */
+}
+
+
+
+/* ------------------------------------
+    DEFAULT MODAL (others remain same)
+-------------------------------------*/
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.55);
 }
 
 .modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: white;
+    margin: 8% auto;
+    padding: 32px;
+    border-radius: 14px;
+    width: 92%;
+    max-width: 520px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
 }
 
 .close {
-    color: #aaa;
     float: right;
     font-size: 28px;
-    font-weight: bold;
     cursor: pointer;
+    color: #777;
 }
+.close:hover { color: black; }
 
-.close:hover {
-    color: #000;
-}
-
+/* Form rows */
 .form-row {
     display: flex;
     gap: 1rem;
 }
 
-.form-row .form-group {
-    flex: 1;
-}
+/* Attendance status colors */
+.status-present { color: #1fb16a; }
+.status-absent { color: #dc3545; }
+.status-proxy_suspected { color: #f0a83a; }
 
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-/* Session Detail */
-.session-detail {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.session-header {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-}
-
-.session-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.session-actions {
-    margin-top: 1rem;
-}
-
-.summary-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.stat-card h4 {
-    margin-bottom: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.stat-number {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.stat-number.present {
-    color: #28a745;
-}
-
-.stat-number.absent {
-    color: #dc3545;
-}
-
-.stat-number.proxy {
-    color: #ffc107;
-}
-
-.status-present {
-    color: #28a745;
-    font-weight: 500;
-}
-
-.status-absent {
-    color: #dc3545;
-    font-weight: 500;
-}
-
-.status-proxy_suspected {
-    color: #ffc107;
-    font-weight: 500;
-}
-
+/* Verification icons */
 .verification-icons {
     display: flex;
-    gap: 0.5rem;
-}
-
-.verification-icon {
+    gap: 8px;
     font-size: 1.2rem;
 }
 
-.status-select {
-    padding: 0.25rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 0.5rem;
+/* Responsive */
+@media (max-width: 960px) {
+    .teacher-dashboard,
+    .session-detail,
+    .sessions-management {
+        padding: 0 14px;
+    }
 }
 
-.update-btn {
-    padding: 0.25rem 0.75rem;
+/* ============================================================
+      GLASS-BLUR EFFECT ONLY FOR CREATE SESSION MODAL
+============================================================ */
+
+/* Soft transparent blurred overlay */
+/* ------------------------------
+   CREATE SESSION MODAL — BLUE GLASS EFFECT
+------------------------------*/
+
+/* Backdrop blur + soft blue tint */
+#createSessionModal {
+    background: rgba(80, 120, 200, 0.35);  /* blue overlay */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.attendance-summary {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+/* Glass modal box */
+#createSessionModal .modal-content {
+    width: 600px;                /* increased size */
+    max-width: 90%;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    
+    border-radius: 24px;
+    padding: 40px 45px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 15px 40px rgba(0, 0, 60, 0.25);
+
+    font-family: "Poppins", sans-serif !important;
 }
 
-.students-table {
+/* Title */
+#createSessionModal h3 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+}
+
+/* Close button */
+#createSessionModal .close {
+    color: white !important;
+    opacity: 0.8;
+}
+#createSessionModal .close:hover {
+    opacity: 1;
+}
+
+/* Input fields */
+#createSessionModal input {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.28) !important;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 14px !important;
+
+    padding: 12px 14px;
+    margin-top: 4px;
+    color: white !important;
+    font-size: 0.95rem;
+
+    font-family: "Poppins", sans-serif !important;
 }
 
-.students-table th,
-.students-table td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+#createSessionModal input::placeholder {
+    color: rgba(255, 255, 255, 0.85);
 }
 
-.students-table th {
-    background-color: #f8f9fa;
+/* Time fields arrangement */
+#createSessionModal .form-row .form-group {
+    flex: 1;
+}
+
+/* Checkbox text */
+#createSessionModal label {
+    color: white;
+    font-family: "Poppins", sans-serif !important;
+}
+
+/* Submit button — matching your theme */
+#createSessionModal button.btn-primary {
+    background: linear-gradient(90deg, #4d8bff, #215bff);
+    color: white;
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 14px;
+
+    font-family: "Poppins", sans-serif !important;
     font-weight: 600;
-    color: #333;
-}
 
-.manage-students {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.reports-page {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.anomalies-section {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-top: 15px;
 }

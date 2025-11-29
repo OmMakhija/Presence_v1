@@ -7,26 +7,51 @@
 {% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <div class="auth-card">
-        <h2>Login to PRESENCE</h2>
+<div class="wrapper">
+
+    <!-- LEFT GRADIENT PANEL -->
+    <div class="left-section">
+        <div class="brand">PRESENCE</div>
+
+        <!-- ADDED IMAGE -->
+        <img src="{{ url_for('static', filename='css/attendance3.png') }}" class="side-image">
+
+        <p class="small">You can easily</p>
+
+        <h1 class="headline">
+            "Secure. Proxy-Free. Instant Attendance."
+        </h1>
+    </div>
+
+    <!-- RIGHT WHITE PANEL -->
+    <div class="right-section">
+
+        <h2>Login</h2>
+
+        <p class="desc">
+            Access your dashboard, attendance and academic analytics in one place.
+        </p>
+
         <form method="POST" action="{{ url_for('auth.login') }}">
-            <div class="form-group">
-                <label for="roll_number">Roll Number / Employee ID</label>
-                <input type="text" id="roll_number" name="roll_number" required>
-            </div>
+            
+            <label>Your username</label>
+            <input type="text" name="roll_number" placeholder="Enter your roll number" required>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button class="primary-btn">Login</button>
         </form>
 
-        <p class="auth-link">
-            Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>
+        <div class="divider">or continue with</div>
+
+        
+
+        <p class="bottom-text">
+            Dont have an account? <a href="{{ url_for('auth.register') }}">Register</a>
         </p>
+
     </div>
+
 </div>
 {% endblock %}
