@@ -76,7 +76,7 @@ PRESENCE System Overview
 
 ## 📋 Prerequisites
 
-- **Python 3.8+** (tested with Python 3.12)
+- **Python**
 - **Webcam** (for face registration and attendance marking)
 - **Modern Web Browser** (Chrome, Firefox, Safari, Edge)
 - **BLE-capable Device** (for proximity verification)
