@@ -69,7 +69,10 @@ def start_server():
 
     try:
         # Start Flask development server
-        subprocess.run([sys.executable, 'backend/app.py'], check=True)
+        subprocess.run(
+        [sys.executable, '-m', 'flask', '--app', 'backend.app', 'run'],
+        check=True
+)
     except KeyboardInterrupt:
         print("\n👋 PRESENCE server stopped")
     except subprocess.CalledProcessError as e:
